@@ -1,12 +1,42 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beautiful Stranger</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beautiful Stranger Photo Booth</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="intro">
-  <img src="assets/booth/booth.png" class="booth">
-  <button class="enter" onclick="location.href='booth.html'">enter →</button>
+
+<body>
+  <div class="booth">
+
+    <div class="camera-wrap">
+      <video id="video" autoplay playsinline></video>
+      <canvas id="capture"></canvas>
+
+      <img id="frame" src="assets/frames/milk-chocolate.png">
+      <img id="grain" src="assets/overlays/grain.png">
+
+      <div id="countdown"></div>
+    </div>
+
+    <div class="controls">
+      <select id="frameSelect">
+        <option value="milk-chocolate.png">Milk Chocolate</option>
+        <option value="claret.png">Claret</option>
+        <option value="pink.png">Pink</option>
+        <option value="sky.png">Sky</option>
+      </select>
+
+      <button id="start">Start Strip</button>
+      <button id="download">Download</button>
+    </div>
+
+    <canvas id="strip"></canvas>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
+

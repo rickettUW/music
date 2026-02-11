@@ -1,40 +1,79 @@
-const cam=document.getElementById('cam');
-navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false})
-.then(s=>cam.srcObject=s)
-.catch(()=>alert('Camera access required'));
+const video = document.getElementById("video");
+const capture = document.getElementById("capture");
+const ctx = capture.getContext("2d");
 
-const canvas=document.getElementById('strip');
-const ctx=canvas.getContext('2d');
-const countdown=document.getElementById('countdown');
-const framePicker=document.getElementById('framePicker');
-const frame=document.getElementById('frame');
+const strip = document.getElementById("strip");
+const stripCtx = strip.getContext("2d");
 
-framePicker.onchange=()=>{
-  frame.style.borderImage=`url(assets/frames/${framePicker.value}) 30 stretch`;
+const frame = document.getElementById("frame");
+const grain = document.getElementById("grain");
+const countdown = document.getElementById("countdown");
+
+let shots = [];
+
+navigator.mediaDevices.getUserMedia({
+  video: { facingMode: "user" }
+}).then(stream => {
+  video.srcObject = stream;
+});
+
+video.onloadedmetadata = () => {
+  capture.width = video.videoWidth;
+  capture.height = video.videoHeight;
 };
 
-const icons=['heart','guitar','drumsticks','star'];
-let shot=0;
+document.getElementById("frameSelect").onchange = e => {
+  frame.src = `assets/frames/${e.target.value}`;
+};
 
-async function themedCountdown(){
-  for(const i of icons){
-    countdown.innerHTML=`<img src="assets/ui/${i}.png">`;
-    await new Promise(r=>setTimeout(r,800));
-  }
-  countdown.innerHTML='';
+function doCountdown(number) {
+  return new Promise(resolve => {
+    countdown.textContent = number;
+    setTimeout(() => {
+      countdown.textContent = "";
+      resolve();
+    }, 700);
+  });
 }
 
-snap.onclick=async()=>{
-  if(shot>=4)return;
-  await themedCountdown();
-  const h=canvas.height/4;
-  ctx.drawImage(cam,0,shot*h,canvas.width,h);
-  shot++;
+async function takePhoto() {
+  ctx.drawImage(video, 0, 0, capture.width, capture.height);
+  ctx.drawImage(frame, 0, 0, capture.width, capture.height);
+  ctx.drawImage(grain, 0, 0, capture.width, capture.height);
+  shots.push(capture.toDataURL("image/png"));
+}
+
+document.getElementById("start").onclick = async () => {
+  shots = [];
+  for (let i = 0; i < 4; i++) {
+    await doCountdown(3);
+    await takePhoto();
+    await new Promise(r => setTimeout(r, 300));
+  }
+
+  const w = capture.width;
+  const h = capture.height;
+  strip.width = w;
+  strip.height = h * 4;
+
+  shots.forEach((src, i) => {
+    const img = new Image();
+    img.onload = () => {
+      stripCtx.drawImage(img, 0, h * i, w, h);
+    };
+    img.src = src;
+  });
 };
 
-download.onclick=()=>{
-  const a=document.createElement('a');
-  a.href=canvas.toDataURL('image/png');
-  a.download='beautiful-stranger.png';
+document.getElementById("download").onclick = () => {
+  const a = document.createElement("a");
+  a.href = strip.toDataURL("image/png");
+  a.download = "beautiful-stranger-strip.png";
   a.click();
+
+  // reset after save
+  stripCtx.clearRect(0,0,strip.width,strip.height);
 };
+
+};
+

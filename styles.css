@@ -1,11 +1,17 @@
-body {
+css
+* {
+  box-sizing: border-box;
   margin: 0;
-  background: #fff;
+  padding: 0;
+}
+
+body {
+  background: white;
   font-family: system-ui, sans-serif;
 }
 
 .booth {
-  max-width: 390px;
+  max-width: 420px;
   margin: auto;
   padding: 12px;
 }
@@ -17,7 +23,9 @@ body {
   overflow: hidden;
 }
 
-video, canvas, img {
+video,
+canvas,
+img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -25,29 +33,30 @@ video, canvas, img {
   object-fit: cover;
 }
 
+#boothArt {
+  z-index: 5;
+  pointer-events: none;
+}
+
 #frame {
-  z-index: 4;
+  z-index: 6;
   pointer-events: none;
 }
 
 #grain {
-  z-index: 5;
-  opacity: 0.25;
+  z-index: 7;
+  opacity: 0.18;
   mix-blend-mode: multiply;
   pointer-events: none;
 }
 
-#countdown {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 96px;
-  font-weight: bold;
-  color: white;
-  z-index: 6;
-  text-shadow: 0 0 12px black;
+#countdownImg {
+  z-index: 10;
+  width: 35%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .controls {
@@ -56,9 +65,11 @@ video, canvas, img {
   margin-top: 10px;
 }
 
-select, button {
+select,
+button {
   flex: 1;
   padding: 8px;
+  font-size: 14px;
 }
 
 #strip {

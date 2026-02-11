@@ -1,19 +1,67 @@
-body{margin:0;font-family:sans-serif;background:#fff;text-align:center}
-.intro{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
-.booth{max-width:90vw;max-height:80vh}
-.enter{margin-top:20px;padding:12px 22px;border-radius:20px}
+body {
+  margin: 0;
+  background: #fff;
+  font-family: system-ui, sans-serif;
+}
 
-.camera-frame{width:260px;height:340px;margin:16px auto;position:relative;border-radius:18px;overflow:hidden;border:6px solid #69140E}
-#cam{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
-.overlay{position:absolute;inset:0;opacity:.18;pointer-events:none}
+.booth {
+  max-width: 390px;
+  margin: auto;
+  padding: 12px;
+}
 
-.countdown{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.countdown img{width:70px;animation:pop .8s forwards}
-@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+.camera-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
 
-.controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+video, canvas, img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-.sticker-tray{display:flex;gap:10px;justify-content:center;margin:10px}
-.sticker{width:44px;cursor:grab}
+#frame {
+  z-index: 4;
+  pointer-events: none;
+}
 
-canvas{display:block;margin:12px auto;background:#eee}
+#grain {
+  z-index: 5;
+  opacity: 0.25;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+#countdown {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 96px;
+  font-weight: bold;
+  color: white;
+  z-index: 6;
+  text-shadow: 0 0 12px black;
+}
+
+.controls {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+select, button {
+  flex: 1;
+  padding: 8px;
+}
+
+#strip {
+  width: 100%;
+  margin-top: 12px;
+}

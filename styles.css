@@ -1,0 +1,19 @@
+body{margin:0;font-family:sans-serif;background:#fff;text-align:center}
+.intro{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.booth{max-width:90vw;max-height:80vh}
+.enter{margin-top:20px;padding:12px 22px;border-radius:20px}
+
+.camera-frame{width:260px;height:340px;margin:16px auto;position:relative;border-radius:18px;overflow:hidden;border:6px solid #69140E}
+#cam{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.overlay{position:absolute;inset:0;opacity:.18;pointer-events:none}
+
+.countdown{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.countdown img{width:70px;animation:pop .8s forwards}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+
+.controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+
+.sticker-tray{display:flex;gap:10px;justify-content:center;margin:10px}
+.sticker{width:44px;cursor:grab}
+
+canvas{display:block;margin:12px auto;background:#eee}

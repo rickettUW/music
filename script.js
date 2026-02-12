@@ -1,13 +1,16 @@
 const video = document.getElementById("video");
-const capture = document.getElementById("capture");
-const ctx = capture.getContext("2d");
 
-const strip = document.getElementById("strip");
-const stripCtx = strip.getContext("2d");
+async function startCamera() {
+  const stream = await navigator.mediaDevices.getUserMedia({
+    video: { facingMode: "user" },
+    audio: false
+  });
+  video.srcObject = stream;
+}
 
-const frame = document.getElementById("frame");
-const grain = document.getElementById("grain");
-const countdown = document.getElementById("countdown");
+document.getElementById("start").addEventListener("click", () => {
+  startCamera();
+});
 
 let shots = [];
 

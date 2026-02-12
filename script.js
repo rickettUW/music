@@ -1,4 +1,21 @@
 const video = document.getElementById("video");
+const startBtn = document.getElementById("start");
+
+async function startCamera() {
+  const stream = await navigator.mediaDevices.getUserMedia({
+    video: { facingMode: "user" },
+    audio: false
+  });
+  video.srcObject = stream;
+  await video.play();
+}
+
+startBtn.addEventListener("click", () => {
+  startCamera();
+});
+
+
+const video = document.getElementById("video");
 
 async function startCamera() {
   const stream = await navigator.mediaDevices.getUserMedia({

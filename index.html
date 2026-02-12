@@ -1,57 +1,33 @@
-html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Beautiful Stranger Photo Booth</title>
+  <title>Photo Booth</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <div class="booth">
 
-    <div class="camera-wrap">
- <video
-  id="video"
-  playsinline
-  muted
-></video>
+<div class="booth">
 
+  <div class="camera-wrap">
+    <video id="video" playsinline muted></video>
+    <canvas id="capture"></canvas>
 
+    <img id="frame" src="assets/frame.png" />
+    <img id="grain" src="assets/grain.png" />
 
-      <canvas id="capture"></canvas>
-
-      <img id="boothArt" src="booth/booth.png" />
-      <img id="frame" src="frames/milk-chocolate.png" />
-      <img id="grain" src="overlays/grain.png" />
-
-      <img id="countdownImg" />
-    </div>
-
-    <div class="controls">
-      <select id="frameSelect">
-        <option value="milk-chocolate.png">Milk Chocolate</option>
-        <option value="claret.png">Claret</option>
-        <option value="pink.png">Pink</option>
-        <option value="sky.png">Sky</option>
-        <option value="olive.png">Olive</option>
-      </select>
-
-      <select id="filterSelect">
-        <option value="none">No Filter</option>
-        <option value="sophia">Sophia</option>
-        <option value="rootbeer">15 Rootbeers</option>
-        <option value="arrhythmia">Arrhythmia</option>
-        <option value="senior">Senior Year</option>
-      </select>
-
-      <button id="start">Take Photo</button>
-    </div>
-
-    <canvas id="strip"></canvas>
+    <div id="countdown"></div>
   </div>
 
-  <script src="script.js"></script>
+  <div class="controls">
+    <button id="start">Take Photo</button>
+    <button id="download">Download</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
